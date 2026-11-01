@@ -151,6 +151,14 @@ $currentYear = date('Y');
       color: #ffffff !important;
       border-color: #10b981 !important;
     }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="min-h-screen font-sans antialiased selection:bg-brand-500 selection:text-white pb-24">
@@ -378,24 +386,38 @@ $currentYear = date('Y');
           ★ Flagship International Client (KSA)
         </div>
         <div>
-          <!-- Studio Delivery & Wallet Mockup -->
-          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b dark:border-slate-800 border-[#d0d5dd]">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200">TransFor Ecosystem</span>
+          <!-- Studio Delivery & Wallet Mockup with Real Play Store Screenshots -->
+          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-4 sm:p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
+            <!-- App Identity Bar -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b dark:border-slate-800 border-[#d0d5dd]">
+              <div class="flex items-center gap-3">
+                <img src="images/projects/transfor-icon.png" alt="TransFor App Icon" class="w-11 h-11 rounded-xl shadow-md border dark:border-slate-700/60 border-slate-200 object-cover flex-shrink-0" loading="lazy">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span class="text-xs font-bold font-sans text-slate-900 dark:text-white">TransFor Ecosystem</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Store Delivery & Digital Wallet</span>
+                </div>
               </div>
-              <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-bold">Testing Phase • Soon to be Live</span>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 font-bold border border-amber-300 dark:border-amber-700/40">Testing Phase</span>
             </div>
-            <!-- Wallet Preview -->
-            <div class="p-3 rounded-xl dark:bg-slate-900 bg-white border dark:border-slate-800 border-[#eaecf0] mb-2.5 shadow-xs">
-              <div class="flex justify-between items-center text-[11px] mb-1">
-                <span class="dark:text-slate-300 text-slate-700 font-semibold">Store Orders & Digital Wallet</span>
-                <span class="text-amber-600 dark:text-amber-400 font-bold">KSA Testing Pilot</span>
+
+            <!-- Screenshots Showcase (3 Real Play Store Screens) -->
+            <div class="flex items-center gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar pb-1">
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/transfor-screen1.png" alt="TransFor Store & Products" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Store & Cart</div>
               </div>
-              <div class="text-[10px] text-slate-500">Flutter Mobile • PHP Backend ➔ Python AI-Native Modernization</div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/transfor-screen2.png" alt="TransFor Wallet & Checkout" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Digital Wallet</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/transfor-screen3.png" alt="TransFor Rider Delivery" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Live Tracking</div>
+              </div>
             </div>
-            <div class="text-[10px] text-slate-500 text-center">Multi-vendor store delivery, live rider tracking, and integrated digital wallet</div>
           </div>
 
           <div class="flex items-center justify-between mb-2">
@@ -423,21 +445,38 @@ $currentYear = date('Y');
       <!-- Project 2: HishabKhata -->
       <div class="project-card mobile bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between">
         <div>
-          <!-- Studio Financial Mockup -->
-          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b dark:border-slate-800 border-[#d0d5dd]">
-              <span class="text-[11px] font-bold text-sky-600 dark:text-cyan-400">Fintech & Store Finance</span>
-              <span class="text-[10px] px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-cyan-300 font-semibold">AI-Native Modernization</span>
-            </div>
-            <!-- Financial Ledger Preview -->
-            <div class="p-3 rounded-xl dark:bg-slate-900 bg-white border dark:border-slate-800 border-[#eaecf0] mb-2.5 shadow-xs">
-              <div class="flex justify-between items-center text-[11px] mb-1">
-                <span class="dark:text-slate-300 text-slate-700 font-semibold">Store Cashflow & Receivables</span>
-                <span class="text-sky-600 dark:text-cyan-400 font-bold">+18.4% MoM</span>
+          <!-- Studio Financial Mockup with Real Play Store Screenshots -->
+          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-4 sm:p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
+            <!-- App Identity Bar -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b dark:border-slate-800 border-[#d0d5dd]">
+              <div class="flex items-center gap-3">
+                <img src="images/projects/hishabkhata-icon.png" alt="HishabKhata App Icon" class="w-11 h-11 rounded-xl shadow-md border dark:border-slate-700/60 border-slate-200 object-cover flex-shrink-0" loading="lazy">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                    <span class="text-xs font-bold font-sans text-slate-900 dark:text-white">HishabKhata</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Store Ledger & Credit Tracking</span>
+                </div>
               </div>
-              <div class="text-[10px] text-slate-500">Flutter • Next.js ➔ Golang & Python AI Microservices</div>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-sky-100 dark:bg-sky-950/80 text-sky-800 dark:text-cyan-300 font-bold border border-sky-300 dark:border-cyan-700/40">AI Transformation</span>
             </div>
-            <div class="text-[10px] text-slate-500 text-center">Smart financial ledger, customer credit tracking, and automated bookkeeping AI</div>
+
+            <!-- Screenshots Showcase (3 Real Play Store Screens) -->
+            <div class="flex items-center gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar pb-1">
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/hishabkhata-screen1.png" alt="HishabKhata Smart Dashboard" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Cash Ledger</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/hishabkhata-screen2.png" alt="HishabKhata Due Reminders" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Due Reminders</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/hishabkhata-screen3.png" alt="HishabKhata Financial Analytics" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Store Reports</div>
+              </div>
+            </div>
           </div>
 
           <div class="flex items-center justify-between mb-2">
@@ -511,20 +550,38 @@ $currentYear = date('Y');
       <!-- Project 4: Pantone Picker -->
       <div class="project-card mobile bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between">
         <div>
-          <!-- Studio Mobile Preview Container -->
-          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b dark:border-slate-800 border-[#d0d5dd]">
-              <span class="text-[11px] font-bold text-violet-600 dark:text-purple-400">Flutter Mobile Engine</span>
-              <span class="text-[10px] text-slate-500">Google Play Store</span>
+          <!-- Studio Mobile Preview Container with Real Play Store Screenshots -->
+          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-4 sm:p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
+            <!-- App Identity Bar -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b dark:border-slate-800 border-[#d0d5dd]">
+              <div class="flex items-center gap-3">
+                <img src="images/projects/pantone-icon.png" alt="Pantone Picker App Icon" class="w-11 h-11 rounded-xl shadow-md border dark:border-slate-700/60 border-slate-200 object-cover flex-shrink-0" loading="lazy">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-violet-500"></span>
+                    <span class="text-xs font-bold font-sans text-slate-900 dark:text-white">Pantone Picker</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Camera Color Extraction</span>
+                </div>
+              </div>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-violet-100 dark:bg-purple-950/80 text-violet-800 dark:text-purple-300 font-bold border border-violet-300 dark:border-purple-700/40">Google Play</span>
             </div>
-            <!-- Swatch Palette Preview -->
-            <div class="grid grid-cols-4 gap-2 mb-2">
-              <div class="h-10 rounded-lg bg-[#0f4c81] flex items-end p-1 text-[9px] text-white font-bold">Classic</div>
-              <div class="h-10 rounded-lg bg-[#ff6f61] flex items-end p-1 text-[9px] text-white font-bold">Living</div>
-              <div class="h-10 rounded-lg bg-[#5f4b8b] flex items-end p-1 text-[9px] text-white font-bold">Ultra</div>
-              <div class="h-10 rounded-lg bg-[#88b04b] flex items-end p-1 text-[9px] text-white font-bold">Greenery</div>
+
+            <!-- Screenshots Showcase (3 Real Play Store Screens) -->
+            <div class="flex items-center gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar pb-1">
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/pantone-screen1.png" alt="Camera Sensor Sampling" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Color Sensor</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/pantone-screen2.png" alt="Palette Harmonies" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Harmonies</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/pantone-screen3.png" alt="Color Swatch Library" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Swatch Library</div>
+              </div>
             </div>
-            <div class="text-[10px] text-slate-500 text-center">Real-time hardware camera sensor sampling & swatch extraction</div>
           </div>
 
           <div class="flex items-center justify-between mb-2">
@@ -741,6 +798,13 @@ $currentYear = date('Y');
       transfor: {
         title: "TransFor Logistics, Store & Wallet",
         subtitle: "Production Flutter Mobile & Backend System • Client in Saudi Arabia (KSA)",
+        icon: "images/projects/transfor-icon.png",
+        screenshots: [
+          "images/projects/transfor-screen1.png",
+          "images/projects/transfor-screen2.png",
+          "images/projects/transfor-screen3.png"
+        ],
+        storeUrl: "https://play.google.com/store/apps/details?id=com.techomega.trans_for",
         challenge: "An enterprise retail client in Saudi Arabia needed a unified multi-vendor on-demand delivery ecosystem, integrating real-time rider tracking, multi-store order dispatching, and an in-app digital wallet processing SAR (Saudi Riyal) transactions with zero balance discrepancies.",
         solution: "Architected cross-platform Flutter mobile applications for consumers, merchants, and riders with offline resilience and map routing. Backend originally built in PHP, now being renovated into an asynchronous Python microservices architecture with an AI-native smart dispatch and route optimization core.",
         outcome: "Currently in active user acceptance testing (UAT) and pilot staging for Saudi Arabia client, preparing for commercial rollout with multi-vendor store ordering and digital wallet balance."
@@ -748,6 +812,13 @@ $currentYear = date('Y');
       hishabkhata: {
         title: "HishabKhata Store Financial Mobile App",
         subtitle: "Retail Bookkeeping & Ledger Mobile Platform • Flutter & Next.js",
+        icon: "images/projects/hishabkhata-icon.png",
+        screenshots: [
+          "images/projects/hishabkhata-screen1.png",
+          "images/projects/hishabkhata-screen2.png",
+          "images/projects/hishabkhata-screen3.png"
+        ],
+        storeUrl: "https://play.google.com/store/apps/details?id=com.hisabkhata.app",
         challenge: "Retail shop owners and micro-enterprises needed an intuitive, fast, mobile-first ledger system to replace paper cashbooks, track receivables/payables, and calculate customer credit balances without accounting complexity.",
         solution: "Engineered high-performance Flutter mobile application with responsive Next.js cloud APIs. Currently architecting an AI-native evolution utilizing high-concurrency Golang services and Python machine learning pipelines for automated paper-bill OCR scanning, predictive cashflow forecasting, and automated merchant voice ledger input.",
         outcome: "Published on Google Play, serving active merchant bookkeeping records with zero transaction loss."
@@ -762,6 +833,13 @@ $currentYear = date('Y');
       pantone: {
         title: "Pantone Picker Mobile App",
         subtitle: "Production Flutter Application published on Google Play",
+        icon: "images/projects/pantone-icon.png",
+        screenshots: [
+          "images/projects/pantone-screen1.png",
+          "images/projects/pantone-screen2.png",
+          "images/projects/pantone-screen3.png"
+        ],
+        storeUrl: "https://play.google.com/store/apps/details?id=com.af.pantone_book",
         challenge: "Designers needed a reliable offline mobile utility to sample colors through hardware camera sensors and match them to international swatch libraries.",
         solution: "Built in Flutter with custom hardware color extraction, local SQLite database, and 60fps palette search without network latency.",
         outcome: "Published on Google Play, 100% crash-free sessions."
@@ -786,10 +864,41 @@ $currentYear = date('Y');
       const data = caseStudyData[id];
       if (!data) return;
 
+      const headerIconHtml = data.icon ? `
+        <img src="${data.icon}" alt="${data.title} Icon" class="w-14 h-14 rounded-2xl shadow-md border dark:border-slate-700/60 border-slate-200 object-cover flex-shrink-0" loading="lazy">
+      ` : '';
+
+      const screenshotsHtml = (data.screenshots && data.screenshots.length > 0) ? `
+        <div class="mb-5">
+          <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 block mb-2">Production App Screenshots</span>
+          <div class="flex items-center gap-3 overflow-x-auto no-scrollbar pb-2 pt-1">
+            ${data.screenshots.map((src, i) => `
+              <div class="relative flex-shrink-0 w-32 sm:w-36 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950">
+                <img src="${src}" alt="Screenshot ${i+1}" class="w-full h-auto object-cover" loading="lazy">
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      const storeLinkHtml = data.storeUrl ? `
+        <a href="${data.storeUrl}" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs text-center transition-all flex items-center justify-center gap-1.5 shadow-sm">
+          <span>View on Google Play</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      ` : '';
+
       document.getElementById('modal-content').innerHTML = `
-        <span class="text-xs font-mono text-emerald-600 dark:text-brand-500 uppercase tracking-widest font-bold block mb-2">Technical Case Study</span>
-        <h3 class="text-2xl font-bold dark:text-white text-slate-900 mb-1">${data.title}</h3>
-        <p class="text-xs dark:text-slate-400 text-slate-500 mb-6 font-mono">${data.subtitle}</p>
+        <div class="flex items-start gap-4 mb-4">
+          ${headerIconHtml}
+          <div>
+            <span class="text-xs font-mono text-emerald-600 dark:text-brand-500 uppercase tracking-widest font-bold block mb-1">Technical Case Study</span>
+            <h3 class="text-2xl font-bold dark:text-white text-slate-900 leading-tight mb-1">${data.title}</h3>
+            <p class="text-xs dark:text-slate-400 text-slate-500 font-mono">${data.subtitle}</p>
+          </div>
+        </div>
+
+        ${screenshotsHtml}
         
         <div class="space-y-4 text-sm leading-relaxed mb-6">
           <div class="p-4 rounded-2xl dark:bg-[#05070c] bg-[#f8f9fc] border dark:border-slate-800 border-[#eaecf0]">
@@ -805,9 +914,12 @@ $currentYear = date('Y');
           </div>
         </div>
 
-        <button onclick="closeModal()" class="w-full py-3 rounded-xl dark:bg-slate-800 bg-slate-900 text-white font-semibold text-xs transition-all hover:opacity-90">
-          Close Case Study
-        </button>
+        <div class="flex items-center gap-3">
+          ${storeLinkHtml}
+          <button onclick="closeModal()" class="flex-1 py-3 rounded-xl dark:bg-slate-800 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-all">
+            Close Case Study
+          </button>
+        </div>
       `;
       document.getElementById('case-study-modal').classList.remove('hidden');
     }
