@@ -647,27 +647,48 @@ $currentYear = date('Y');
       <!-- Project 6: RentBDOnline -->
       <div class="project-card web bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between">
         <div>
-          <!-- Studio Portal Preview Container -->
-          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b dark:border-slate-800 border-[#d0d5dd]">
-              <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400">High-Traffic Portal Engine</span>
-              <span class="text-[10px] text-slate-500">PHP 8 / MySQL</span>
+          <!-- Studio Portal Preview Container with Real Production Screenshots -->
+          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-4 sm:p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
+            <!-- App Identity Bar -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b dark:border-slate-800 border-[#d0d5dd]">
+              <div class="flex items-center gap-3">
+                <img src="images/projects/rentbd-icon.png" alt="RentBD App Icon" class="w-11 h-11 rounded-xl shadow-md border dark:border-slate-700/60 border-slate-200 object-cover flex-shrink-0" loading="lazy">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-bold font-sans text-slate-900 dark:text-white">RentBD PropTech</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Direct Landlord Marketplace</span>
+                </div>
+              </div>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-300 dark:border-emerald-700/40">Production Live</span>
             </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl dark:bg-slate-900 bg-white border dark:border-slate-800 border-[#eaecf0] text-[11px] mb-2 dark:text-slate-300 text-slate-700">
-              <span>Concurrent Indexed Listings</span>
-              <span class="text-amber-600 dark:text-amber-400 font-bold">1,000+ Daily</span>
+
+            <!-- Screenshots Showcase (3 Real Production Screens) -->
+            <div class="flex items-center gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar pb-1">
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/rentbd-screen1.png" alt="RentBD Homepage & Carousel" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Hero & Carousel</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/rentbd-screen2.png" alt="RentBD 10/Page Directory" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">10/Page Directory</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/rentbd-screen3.png" alt="RentBD HD Lightbox Gallery" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">HD Lightbox</div>
+              </div>
             </div>
-            <div class="text-[10px] text-slate-500 text-center">Optimized SQL query caching & direct lead routing</div>
           </div>
 
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">MARKETPLACE PORTAL</span>
-            <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">PHP 8</span>
+            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-brand-400">COMMERCIAL & RESIDENTIAL PROPTECH</span>
+            <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">Laravel 12 • Alpine.js</span>
           </div>
 
-          <h3 class="text-2xl font-bold dark:text-white text-slate-900 mb-2">RentBDOnline Real Estate</h3>
+          <h3 class="text-2xl font-bold dark:text-white text-slate-900 mb-2">RentBD Commercial & Property Portal</h3>
           <p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed mb-6">
-            High-throughput marketplace directory serving active property listings. Features geo-filtered search, server-side image compression, and direct client inquiry delivery.
+            Nationwide property marketplace serving 64 districts in Bangladesh. Features touch-friendly recent listings carousel, bilingual English/Bangla localization, Select2 SVG taxonomy, operations verification moderation pipeline, and zero-dependency GLightbox gallery.
           </p>
         </div>
 
@@ -676,7 +697,7 @@ $currentYear = date('Y');
             <span>Read Case Study</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </button>
-          <a href="https://rentbdonline.techbros.co.za/index.php?f=0" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-amber-600 dark:hover:text-amber-400 underline">
+          <a href="https://rentbdonline.techbros.co.za/" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-amber-600 dark:hover:text-amber-400 underline">
             Live Site ↗
           </a>
         </div>
@@ -852,11 +873,19 @@ $currentYear = date('Y');
         outcome: "98+ Lighthouse Performance Score, instant checkout transitions."
       },
       rentbd: {
-        title: "RentBDOnline Portal",
-        subtitle: "High-throughput marketplace platform",
-        challenge: "Handling heavy concurrent search traffic and property listings with minimal server footprint.",
-        solution: "Optimized PHP data pipeline with query caching, image compression, and direct buyer-seller routing.",
-        outcome: "Active marketplace serving listings daily with zero downtime."
+        title: "RentBD Commercial & PropTech Portal",
+        subtitle: "Modernized Laravel 12 & Alpine.js Marketplace",
+        icon: "images/projects/rentbd-icon.png",
+        screenshots: [
+          "images/projects/rentbd-screen1.png",
+          "images/projects/rentbd-screen2.png",
+          "images/projects/rentbd-screen3.png"
+        ],
+        storeUrl: "https://rentbdonline.techbros.co.za/",
+        storeText: "Visit Live Platform ↗",
+        challenge: "Modernizing a high-throughput nationwide property directory across 64 districts in Bangladesh without service downtime, while upgrading legacy tables to an indexed Laravel 12 architecture, enforcing strict administrative phone verification, and enhancing listing photo presentation.",
+        solution: "Re-engineered the platform with bilingual (English/Bangla) localization, Select2 SVG taxonomy, automated GD thumbnail generation, touch-friendly homepage recent listings carousel, responsive 10-per-page directory pagination, and full-resolution GLightbox modal gallery.",
+        outcome: "100% verified listing feeds, sub-100ms response times on LiteSpeed, zero unverified leaks to public visitors, and an end-to-end audit trail in the operations admin dashboard."
       }
     };
 
@@ -883,7 +912,7 @@ $currentYear = date('Y');
 
       const storeLinkHtml = data.storeUrl ? `
         <a href="${data.storeUrl}" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs text-center transition-all flex items-center justify-center gap-1.5 shadow-sm">
-          <span>View on Google Play</span>
+          <span>${data.storeText || 'View on Google Play'}</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
       ` : '';
