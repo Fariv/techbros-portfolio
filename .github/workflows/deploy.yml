@@ -1,12 +1,11 @@
 name: Deploy TechBros Portfolio to DirectAdmin (FTP)
 
 on:
-  # Kept manual-only until the live site backup is imported & verified.
-  # Once verified, we will uncomment `push` below for automatic deployments!
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
+
 
 jobs:
   ftp-deploy:

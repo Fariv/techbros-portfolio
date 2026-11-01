@@ -1,0 +1,20 @@
+# TechBros Portfolio Apache Configuration
+DirectoryIndex index.php index.html
+
+<IfModule mod_headers.c>
+    # Security Headers
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Block access to hidden files and backup folders
+    RewriteRule ^\.(?!well-known/) - [F]
+    RewriteRule ^_backups/ - [F]
+    RewriteRule ^\.agents/ - [F]
+</IfModule>
