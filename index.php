@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$pageTitle = 'TechBros — Engineering Studio & Digital Product Labs';
+$pageTitle = 'TechBros | Engineering Studio & Digital Product Labs';
 $pageDescription = 'High-conviction software engineering studio building production web platforms, Flutter mobile apps, and high-concurrency cloud systems for global startups.';
 $canonicalUrl = 'https://portfolio.techbros.co.za/';
 $ogImage = 'https://portfolio.techbros.co.za/images/collaborating.jpg';
@@ -609,33 +609,54 @@ $currentYear = date('Y');
       <!-- Project 5: SuperStoreX -->
       <div class="project-card web bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between">
         <div>
-          <!-- Studio Commerce Preview Container -->
-          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b dark:border-slate-800 border-[#d0d5dd]">
-              <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400">Headless Next.js Storefront</span>
-              <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">98 Performance</span>
+          <!-- Studio Commerce Preview Container with Real Production Screenshots -->
+          <div class="rounded-2xl dark:bg-[#05070c] bg-slate-100 p-4 sm:p-5 text-xs font-mono mb-6 shadow-sm border dark:border-slate-800 border-[#e4e7ec]">
+            <!-- App Identity Bar -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b dark:border-slate-800 border-[#d0d5dd]">
+              <div class="flex items-center gap-3">
+                <img src="images/projects/superstore-icon.png" alt="SuperStoreX App Icon" class="w-11 h-11 rounded-xl shadow-md border dark:border-slate-700/60 border-slate-200 object-cover flex-shrink-0" loading="lazy">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                    <span class="text-xs font-bold font-sans text-slate-900 dark:text-white">SuperStoreX</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Next.js 16 • Headless E-Commerce</span>
+                </div>
+              </div>
+              <span class="text-[10px] px-2.5 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-300 font-bold border border-indigo-300 dark:border-indigo-700/40">Production Live</span>
             </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl dark:bg-slate-900 bg-white border dark:border-slate-800 border-[#eaecf0] text-[11px] mb-2 dark:text-slate-300 text-slate-700">
-              <span>Optimistic Cart Calculation</span>
-              <span class="text-emerald-600 dark:text-emerald-400 font-bold">&lt;15ms</span>
+
+            <!-- Screenshots Showcase (3 Real Production Screens) -->
+            <div class="flex items-center gap-2.5 sm:gap-3 overflow-x-auto no-scrollbar pb-1">
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/superstore-screen1.png" alt="SuperStoreX Storefront & Deals" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Deals & Catalog</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/superstore-screen2.png" alt="SuperStoreX Faceted Search" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Faceted Search</div>
+              </div>
+              <div class="relative flex-shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden shadow-md border dark:border-slate-800 border-slate-200/80 bg-slate-950 group/screen">
+                <img src="images/projects/superstore-screen3.png" alt="SuperStoreX Product Details" class="w-full h-auto object-cover group-hover/screen:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-[9px] text-white text-center font-sans font-medium">Interactive Detail</div>
+              </div>
             </div>
-            <div class="text-[10px] text-slate-500 text-center">Instant client facet search & edge-cached catalogs</div>
           </div>
 
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400">HEADLESS E-COMMERCE</span>
-            <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">Next.js / TS</span>
+            <span class="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400">HEADLESS E-COMMERCE PLATFORM</span>
+            <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">Next.js 16 • Turbopack • Mongoose</span>
           </div>
 
-          <h3 class="text-2xl font-bold dark:text-white text-slate-900 mb-2">SuperStoreX Platform</h3>
+          <h3 class="text-2xl font-bold dark:text-white text-slate-900 mb-2">SuperStoreX Modern Retail Storefront</h3>
           <p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed mb-6">
-            Modern headless e-commerce store built for high conversion. Features instantaneous client-side product filtering, responsive cart management, and sub-second page transitions.
+            Production headless electronics and robotics marketplace with Turbopack & React 19. Features bilingual localization (next-intl), multi-provider authentication (Auth.js v5 beta), bKash digital payment integration, automated PDF invoice generation, and Google Drive cloud media storage.
           </p>
         </div>
 
         <div class="flex items-center justify-between pt-5 border-t dark:border-slate-800/80 border-[#f2f4f7]">
           <button onclick="openModal('superstore')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 flex items-center gap-1.5">
-            <span>Read Architecture</span>
+            <span>Read Case Study</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </button>
           <a href="https://superstorex.vercel.app/" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 underline">
@@ -867,10 +888,18 @@ $currentYear = date('Y');
       },
       superstore: {
         title: "SuperStoreX Headless Commerce",
-        subtitle: "Next.js & TypeScript retail architecture",
-        challenge: "E-commerce stores lose customers on slow category transitions and sluggish checkout recalculations.",
-        solution: "Built a headless architecture with optimistic UI updates, edge caching, and instant client-side facet filtering.",
-        outcome: "98+ Lighthouse Performance Score, instant checkout transitions."
+        subtitle: "Production Next.js 16, React 19 & Mongoose Retail Platform",
+        icon: "images/projects/superstore-icon.png",
+        screenshots: [
+          "images/projects/superstore-screen1.png",
+          "images/projects/superstore-screen2.png",
+          "images/projects/superstore-screen3.png"
+        ],
+        storeUrl: "https://superstorex.vercel.app/",
+        storeText: "Visit Live Storefront ↗",
+        challenge: "Traditional e-commerce platforms suffer from high bounce rates due to sluggish page recalculations, fragmented checkout gateways, unoptimized mobile catalogs, and rigid monolithic backends unable to handle multi-locale currencies and bilingual customer bases.",
+        solution: "Engineered a headless retail application using Next.js 16 with Turbopack, React 19, and Mongoose 8. Features Next-Intl bilingual English/Bangla localization, dual BDT/USD currency toggle, multi-provider Auth.js (v5 beta) authentication, real-time faceted search, bKash digital payment gateway integration, automated serverless PDF receipt generation with @react-pdf, and cloud media asset management via Google Drive APIs.",
+        outcome: "Sub-second page transitions on Vercel Edge, 98+ Lighthouse scores, zero-latency client cart updates, and robust automated checkout and invoice delivery."
       },
       rentbd: {
         title: "RentBD Commercial & PropTech Portal",
