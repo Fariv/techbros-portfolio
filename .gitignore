@@ -1,0 +1,20 @@
+# Local secrets & FTP credentials (never commit)
+.env
+.env.*
+*.pem
+*.key
+
+# Server & local assistant configurations
+cgi-bin/
+_backups/
+.agents/
+
+# Dependencies & build caches
+node_modules/
+vendor/
+.cache/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/

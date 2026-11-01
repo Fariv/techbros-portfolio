@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Techbros – Web & Mobile Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            fadeInUp: 'fadeInUp 0.6s ease-out both',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            },
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #4CAF50;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-[#F9FAFB] text-[#2F2F2F] font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-[#4CAF50]">Techbros</h1>
+      <nav class="space-x-6 hidden md:block relative">
+        <a href="#about" class="relative hover:text-[#4CAF50]">About</a>
+        <a href="#services" class="relative hover:text-[#4CAF50]">Services</a>
+        <a href="#projects" class="relative hover:text-[#4CAF50]">Projects</a>
+        <a href="#why" class="relative hover:text-[#4CAF50]">Why Us</a>
+        <a href="#contact" class="relative hover:text-[#4CAF50]">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="text-center py-20 px-6 bg-white reveal">
+    <h2 class="text-4xl font-bold mb-4">We Build Smart Web & Mobile Apps</h2>
+    <p class="text-lg mb-6">Using Laravel, React, Next.js, Flutter, and AWS – we bring ideas to life.</p>
+    <div class="space-x-4">
+      <a href="#projects" class="px-6 py-3 bg-[#4CAF50] text-white rounded hover:bg-[#388E3C] transform transition hover:scale-105 active:scale-95">See Our Work</a>
+      <a href="#contact" class="px-6 py-3 border border-[#4CAF50] text-[#4CAF50] rounded hover:bg-[#4CAF50] hover:text-white transform transition hover:scale-105 active:scale-95">Get a Free Quote</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-16 bg-[#F9FAFB] px-6 max-w-4xl mx-auto text-center reveal">
+    <h3 class="text-3xl font-bold mb-4">About Techbros</h3>
+    <p class="text-lg leading-relaxed">
+      We’re a Bangladesh-based team building modern web and mobile applications for startups and businesses around the globe.
+      From idea to deployment — we deliver fast, scalable, and secure digital solutions.
+    </p>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-16 bg-white px-6 max-w-6xl mx-auto reveal">
+    <h3 class="text-3xl font-bold text-center mb-12">Our Services</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-[#F9FAFB] p-6 rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+        <h4 class="text-xl font-semibold mb-2">Web Development</h4>
+        <p>Custom web apps using PHP, Laravel, React & Next.js</p>
+      </div>
+      <div class="bg-[#F9FAFB] p-6 rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+        <h4 class="text-xl font-semibold mb-2">Mobile Development</h4>
+        <p>Cross-platform mobile apps using Flutter</p>
+      </div>
+      <div class="bg-[#F9FAFB] p-6 rounded-lg shadow hover:shadow-lg transition transform hover:-translate-y-1">
+        <h4 class="text-xl font-semibold mb-2">Hosting & Deployment</h4>
+        <p>We use cPanel, DirectAdmin, Vercel & AWS to go live securely</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-16 px-6 bg-[#F9FAFB] max-w-7xl mx-auto reveal">
+    <h3 class="text-3xl font-bold text-center mb-12">Our Work</h3>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transform transition hover:-translate-y-1">
+        <h4 class="text-xl font-semibold">Pantone Picker</h4>
+        <p class="text-sm text-gray-600 mb-2">Flutter Mobile App</p>
+        <p>A beautiful mobile app for exploring Pantone colors.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.af.pantone_book" target="_blank" class="text-[#4CAF50] underline mt-2 inline-block">View on Play Store</a>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transform transition hover:-translate-y-1">
+        <h4 class="text-xl font-semibold">LifeHackUniversity</h4>
+        <p class="text-sm text-gray-600 mb-2">Next.js Blog Platform</p>
+        <p>A blog site to share practical learning & hacks.</p>
+        <a href="https://lifehackeruniversity.vercel.app/" target="_blank" class="text-[#4CAF50] underline mt-2 inline-block">Visit Site</a>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transform transition hover:-translate-y-1">
+        <h4 class="text-xl font-semibold">SuperStoreX</h4>
+        <p class="text-sm text-gray-600 mb-2">Next.js E-Commerce</p>
+        <p>A modern e-commerce demo with product flow & cart.</p>
+        <a href="https://superstorex.vercel.app/" target="_blank" class="text-[#4CAF50] underline mt-2 inline-block">Visit Site</a>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transform transition hover:-translate-y-1">
+        <h4 class="text-xl font-semibold">RentBDOnline</h4>
+        <p class="text-sm text-gray-600 mb-2">Raw PHP Social Platform</p>
+        <p>Platform for posting rent, buy/sell listings in Bangladesh.</p>
+        <a href="https://rentbdonline.techbros.co.za/index.php?f=0" target="_blank" class="text-[#4CAF50] underline mt-2 inline-block">Visit Site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why" class="py-16 bg-white px-6 max-w-5xl mx-auto reveal">
+    <h3 class="text-3xl font-bold text-center mb-12">Why Choose Techbros?</h3>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-[#F9FAFB] p-5 rounded shadow flex flex-col items-center text-center hover:shadow-lg transition transform hover:-translate-y-1">
+        <img src="images/problem_solving.jpg" alt="Problem Solving" class="w-48 h-48 mb-4">
+        <h4 class="font-semibold mb-2">💡 Practical Problem Solvers</h4>
+        <p>We focus on real-world solutions, not just writing code.</p>
+      </div>
+      <div class="bg-[#F9FAFB] p-5 rounded shadow flex flex-col items-center text-center hover:shadow-lg transition transform hover:-translate-y-1">
+        <img src="images/rocket_launch.jpg" alt="Fast Delivery" class="w-48 h-48 mb-4">
+        <h4 class="font-semibold mb-2">🚀 Fast & Focused Delivery</h4>
+        <p>Agile workflows to launch MVPs and apps quickly.</p>
+      </div>
+      <div class="bg-[#F9FAFB] p-5 rounded shadow flex flex-col items-center text-center hover:shadow-lg transition transform hover:-translate-y-1">
+        <img src="images/fullstack.jpg" alt="Full-Stack Expertise" class="w-48 h-48 mb-4">
+        <h4 class="font-semibold mb-2">📱 Full-Stack Tech Expertise</h4>
+        <p>We choose the right tools—from Laravel to Flutter to AWS.</p>
+      </div>
+      <div class="bg-[#F9FAFB] p-5 rounded shadow flex flex-col items-center text-center hover:shadow-lg transition transform hover:-translate-y-1">
+        <img src="images/collaborating.jpg" alt="Clear Communication" class="w-48 h-48 mb-4">
+        <h4 class="font-semibold mb-2">🤝 Clear Communication</h4>
+        <p>No jargon. No surprises. Just honest collaboration.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 px-6 bg-[#F9FAFB] max-w-3xl mx-auto reveal">
+    <h3 class="text-3xl font-bold text-center mb-8">Let's Work Together</h3>
+    <form class="space-y-4" action="contact.php" method="POST">
+      <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4CAF50]" />
+      <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4CAF50]" />
+      <textarea rows="4" placeholder="Your Message / Project Idea" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4CAF50]"></textarea>
+      <button type="submit" class="bg-[#4CAF50] text-white px-6 py-3 rounded hover:bg-[#388E3C] transform transition hover:scale-105 active:scale-95">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 py-6">
+    &copy; 2025 Techbros. All rights reserved.
+  </footer>
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
