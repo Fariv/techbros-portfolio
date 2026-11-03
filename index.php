@@ -13,6 +13,12 @@ $currentYear = date('Y');
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
   <!-- Primary Meta Tags -->
   <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
   <meta name="title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
@@ -40,7 +46,7 @@ $currentYear = date('Y');
     "@type": "ProfessionalService",
     "name": "TechBros",
     "url": "https://portfolio.techbros.co.za/",
-    "logo": "https://portfolio.techbros.co.za/images/rocket_launch.jpg",
+    "logo": "https://portfolio.techbros.co.za/images/techbros-icon-512.png",
     "image": "https://portfolio.techbros.co.za/images/collaborating.jpg",
     "description": "<?= htmlspecialchars($pageDescription, ENT_QUOTES, 'UTF-8') ?>",
     "email": "techbros@techbros.co.za",
@@ -66,12 +72,16 @@ $currentYear = date('Y');
         extend: {
           colors: {
             brand: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857'
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#38bdf8',
+              500: '#0084ff',
+              600: '#006fe6',
+              700: '#0057b8',
+              800: '#0a2554',
+              900: '#081a36'
             }
           }
         }
@@ -120,8 +130,8 @@ $currentYear = date('Y');
       box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 0.04), 0 1px 2px -1px rgba(16, 24, 40, 0.02);
     }
     html:not(.dark) .bento-card:hover {
-      border-color: #10b981;
-      box-shadow: 0 12px 28px -4px rgba(16, 24, 40, 0.08), 0 4px 12px -2px rgba(16, 185, 129, 0.08);
+      border-color: #0084ff;
+      box-shadow: 0 12px 28px -4px rgba(16, 24, 40, 0.08), 0 4px 12px -2px rgba(0, 132, 255, 0.12);
       transform: translateY(-2px);
     }
 
@@ -131,8 +141,8 @@ $currentYear = date('Y');
       border: 1px solid rgba(255, 255, 255, 0.07);
     }
     html.dark .bento-card:hover {
-      border-color: rgba(16, 185, 129, 0.5);
-      box-shadow: 0 12px 30px -8px rgba(16, 185, 129, 0.12);
+      border-color: rgba(0, 245, 212, 0.4);
+      box-shadow: 0 12px 30px -8px rgba(0, 132, 255, 0.2);
       transform: translateY(-2px);
     }
 
@@ -147,9 +157,10 @@ $currentYear = date('Y');
     }
 
     .chip-active {
-      background-color: #10b981 !important;
+      background-color: #0084ff !important;
       color: #ffffff !important;
-      border-color: #10b981 !important;
+      border-color: #0084ff !important;
+      box-shadow: 0 4px 12px rgba(0, 132, 255, 0.25) !important;
     }
 
     .no-scrollbar::-webkit-scrollbar {
@@ -169,8 +180,8 @@ $currentYear = date('Y');
       
       <!-- Logo -->
       <a href="#" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-xl bg-brand-500 flex items-center justify-center font-bold text-slate-950 shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-          <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <div class="w-10 h-10 rounded-xl dark:bg-slate-900 bg-white border dark:border-slate-800 border-slate-200/90 shadow-sm flex items-center justify-center p-1.5 group-hover:scale-105 group-hover:border-brand-500 transition-all">
+          <img src="images/techbros-logo.png" alt="TechBros Monogram Logo" class="w-full h-full object-contain" width="40" height="40">
         </div>
         <div>
           <span class="font-extrabold text-lg tracking-tight dark:text-white text-slate-900 block leading-tight">TechBros</span>
@@ -193,7 +204,7 @@ $currentYear = date('Y');
           <span id="theme-label" class="hidden sm:inline">Dark Mode</span>
         </button>
 
-        <a href="#contact" class="px-5 py-2.5 rounded-full bg-slate-900 dark:bg-brand-500 text-white dark:text-slate-950 font-bold text-xs tracking-wide hover:opacity-90 shadow-md shadow-slate-900/10 dark:shadow-brand-500/20 transition-all">
+        <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-600 hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400 text-white dark:text-slate-950 font-bold text-xs tracking-wide hover:opacity-95 shadow-md shadow-brand-500/20 transition-all">
           Start Project ➔
         </a>
       </div>
@@ -206,15 +217,15 @@ $currentYear = date('Y');
     <div class="max-w-6xl mx-auto px-6 pt-20 pb-20 text-center">
       
       <!-- Status Badge -->
-      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full dark:bg-slate-900 bg-white border dark:border-slate-800 border-[#d0d5dd] text-xs font-mono font-semibold dark:text-brand-400 text-emerald-700 shadow-sm mb-8">
-        <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-pulse"></span>
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full dark:bg-slate-900 bg-white border dark:border-slate-800 border-[#d0d5dd] text-xs font-mono font-semibold dark:text-cyan-400 text-brand-600 shadow-sm mb-8">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
         Available for Q4 & 2027 Engineering Sprints
       </div>
 
       <!-- Main Headline -->
       <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight-title dark:text-white text-slate-900 max-w-4xl mx-auto leading-[1.08] mb-6">
         We build scalable software with 
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-cyan-600 dark:from-brand-400 dark:to-cyan-400">engineering rigor</span> and speed.
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-cyan-500 dark:from-brand-400 dark:to-cyan-400">engineering rigor</span> and speed.
       </h1>
 
       <!-- Subtitle -->
@@ -224,7 +235,7 @@ $currentYear = date('Y');
 
       <!-- CTA Row -->
       <div class="flex flex-wrap items-center justify-center gap-3.5 mb-16">
-        <a href="#work" class="px-7 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 dark:bg-brand-500 dark:hover:bg-brand-400 text-white dark:text-slate-950 font-bold text-sm transition-all shadow-lg shadow-emerald-600/20 dark:shadow-brand-500/20 flex items-center gap-2">
+        <a href="#work" class="px-7 py-3.5 rounded-full bg-brand-600 hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400 text-white dark:text-slate-950 font-bold text-sm transition-all shadow-lg shadow-brand-600/20 dark:shadow-brand-500/20 flex items-center gap-2">
           <span>Explore Selected Work</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </a>
@@ -240,7 +251,7 @@ $currentYear = date('Y');
           <div class="text-xs dark:text-slate-400 text-slate-500 font-medium">Sprint Delivery Record</div>
         </div>
         <div class="bento-card p-5 rounded-2xl">
-          <div class="text-3xl font-extrabold text-emerald-600 dark:text-brand-400 tracking-tight-title mb-1">&lt;0.2s</div>
+          <div class="text-3xl font-extrabold text-brand-600 dark:text-cyan-400 tracking-tight-title mb-1">&lt;0.2s</div>
           <div class="text-xs dark:text-slate-400 text-slate-500 font-medium">TTFB / Initial Render</div>
         </div>
         <div class="bento-card p-5 rounded-2xl">
@@ -260,7 +271,7 @@ $currentYear = date('Y');
   <section id="services" class="max-w-6xl mx-auto px-6 py-20">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
       <div>
-        <span class="text-xs font-mono font-bold tracking-widest text-emerald-600 dark:text-brand-500 uppercase block mb-2">01 / Capabilities</span>
+        <span class="text-xs font-mono font-bold tracking-widest text-brand-600 dark:text-brand-400 uppercase block mb-2">01 / Capabilities</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold dark:text-white text-slate-900 tracking-tight-title">Full-Lifecycle Product Engineering</h2>
       </div>
       <p class="text-sm dark:text-slate-400 text-slate-600 max-w-md leading-relaxed">
@@ -275,7 +286,7 @@ $currentYear = date('Y');
       <div class="bento-card md:col-span-2 p-8 md:p-10 rounded-3xl flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-6">
-            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-50 dark:bg-brand-500/10 text-emerald-700 dark:text-brand-400 border border-emerald-200 dark:border-brand-500/20">
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400 border border-brand-200 dark:border-brand-500/20">
               WEB PLATFORMS & SAAS
             </span>
             <span class="text-xs text-slate-400 font-mono">01</span>
@@ -364,13 +375,13 @@ $currentYear = date('Y');
   <section id="work" class="max-w-6xl mx-auto px-6 py-20 border-t dark:border-slate-800/80 border-[#eaecf0]">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
       <div>
-        <span class="text-xs font-mono font-bold tracking-widest text-emerald-600 dark:text-brand-500 uppercase block mb-2">02 / Portfolio</span>
+        <span class="text-xs font-mono font-bold tracking-widest text-brand-600 dark:text-brand-400 uppercase block mb-2">02 / Portfolio</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold dark:text-white text-slate-900 tracking-tight-title">Featured Projects & Case Studies</h2>
       </div>
 
       <!-- Filter Tabs -->
       <div class="flex flex-wrap gap-2 text-xs font-semibold">
-        <button onclick="filterCategory('all')" id="btn-all" class="chip-active px-4 py-2 rounded-full border border-emerald-600 dark:border-slate-700 transition-all">All Work</button>
+        <button onclick="filterCategory('all')" id="btn-all" class="chip-active px-4 py-2 rounded-full border border-brand-500 dark:border-slate-700 transition-all">All Work</button>
         <button onclick="filterCategory('mobile')" id="btn-mobile" class="px-4 py-2 rounded-full border border-[#d0d5dd] dark:border-slate-800 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 hover:border-slate-400 transition-all">Mobile Apps</button>
         <button onclick="filterCategory('web')" id="btn-web" class="px-4 py-2 rounded-full border border-[#d0d5dd] dark:border-slate-800 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 hover:border-slate-400 transition-all">Web & Commerce</button>
         <button onclick="filterCategory('oss')" id="btn-oss" class="px-4 py-2 rounded-full border border-[#d0d5dd] dark:border-slate-800 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 hover:border-slate-400 transition-all">Systems & OSS</button>
@@ -381,8 +392,8 @@ $currentYear = date('Y');
     <div class="grid md:grid-cols-2 gap-8" id="projects-container">
 
       <!-- Project 1: TransFor (FLAGSHIP FRONT SHOWCASE) -->
-      <div class="project-card mobile bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between border-2 border-emerald-500/40 dark:border-brand-500/40 relative">
-        <div class="absolute -top-3 left-8 px-3 py-0.5 rounded-full bg-emerald-600 text-white font-mono text-[10px] font-bold tracking-wider uppercase shadow-md">
+      <div class="project-card mobile bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between border-2 border-brand-500/40 dark:border-brand-500/40 relative">
+        <div class="absolute -top-3 left-8 px-3 py-0.5 rounded-full bg-brand-600 text-white font-mono text-[10px] font-bold tracking-wider uppercase shadow-md">
           ★ Flagship International Client (KSA)
         </div>
         <div>
@@ -421,7 +432,7 @@ $currentYear = date('Y');
           </div>
 
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-brand-400">ENTERPRISE LOGISTICS & WALLET</span>
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400">ENTERPRISE LOGISTICS & WALLET</span>
             <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">Saudi Arabia (KSA) • Pre-Launch</span>
           </div>
 
@@ -432,11 +443,11 @@ $currentYear = date('Y');
         </div>
 
         <div class="flex items-center justify-between pt-5 border-t dark:border-slate-800/80 border-[#f2f4f7]">
-          <button onclick="openModal('transfor')" class="text-xs font-bold text-emerald-600 dark:text-brand-500 hover:opacity-80 flex items-center gap-1.5">
+          <button onclick="openModal('transfor')" class="text-xs font-bold text-brand-600 dark:text-brand-400 hover:opacity-80 flex items-center gap-1.5">
             <span>Read Case Study & Architecture Roadmap</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </button>
-          <a href="https://play.google.com/store/apps/details?id=com.techomega.trans_for" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-emerald-600 dark:hover:text-brand-400 underline">
+          <a href="https://play.google.com/store/apps/details?id=com.techomega.trans_for" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 underline">
             Play Store (Testing) ↗
           </a>
         </div>
@@ -526,7 +537,7 @@ $currentYear = date('Y');
           </div>
 
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-brand-500">SYSTEMS & ARCHITECTURE</span>
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400">SYSTEMS & ARCHITECTURE</span>
             <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">2026 Release</span>
           </div>
 
@@ -537,11 +548,11 @@ $currentYear = date('Y');
         </div>
 
         <div class="flex items-center justify-between pt-5 border-t dark:border-slate-800/80 border-[#f2f4f7]">
-          <button onclick="openModal('pulse')" class="text-xs font-bold text-emerald-600 dark:text-brand-500 hover:opacity-80 flex items-center gap-1.5">
+          <button onclick="openModal('pulse')" class="text-xs font-bold text-brand-600 dark:text-brand-400 hover:opacity-80 flex items-center gap-1.5">
             <span>Read Architecture Case Study</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </button>
-          <a href="https://github.com/Fariv/pulse" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-emerald-600 dark:hover:text-brand-400 underline">
+          <a href="https://github.com/Fariv/pulse" target="_blank" class="text-xs font-mono font-semibold dark:text-slate-400 text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 underline">
             GitHub ↗
           </a>
         </div>
@@ -703,7 +714,7 @@ $currentYear = date('Y');
           </div>
 
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-brand-400">COMMERCIAL & RESIDENTIAL PROPTECH</span>
+            <span class="text-xs font-mono font-bold text-brand-600 dark:text-brand-400">COMMERCIAL & RESIDENTIAL PROPTECH</span>
             <span class="text-xs dark:text-slate-500 text-slate-400 font-mono">Laravel 12 • Alpine.js</span>
           </div>
 
@@ -731,7 +742,7 @@ $currentYear = date('Y');
   <section id="contact" class="max-w-4xl mx-auto px-6 py-20 border-t dark:border-slate-800/80 border-[#eaecf0]">
     <div class="bento-card p-8 md:p-12 rounded-3xl">
       <div class="max-w-2xl mb-8">
-        <span class="text-xs font-mono font-bold tracking-widest text-emerald-600 dark:text-brand-500 uppercase block mb-2">03 / Inbound</span>
+        <span class="text-xs font-mono font-bold tracking-widest text-brand-600 dark:text-brand-400 uppercase block mb-2">03 / Inbound</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold dark:text-white text-slate-900 tracking-tight-title mb-3">Schedule a Project Scoping Call</h2>
         <p class="text-sm dark:text-slate-400 text-slate-600 leading-relaxed">
           Share your product requirements and timeline. A senior engineer will review your brief and reply within 24 hours.
@@ -742,7 +753,7 @@ $currentYear = date('Y');
         <div>
           <label class="block text-xs font-mono dark:text-slate-300 text-slate-700 mb-2 uppercase tracking-wider font-semibold">1. Select Project Discipline</label>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            <button type="button" onclick="selectDiscipline(this, 'Web Platform')" class="discipline-btn chip-active px-3 py-2.5 rounded-xl border border-emerald-600 dark:border-slate-700 text-xs font-medium text-center transition-all">Web Platform</button>
+            <button type="button" onclick="selectDiscipline(this, 'Web Platform')" class="discipline-btn chip-active px-3 py-2.5 rounded-xl border border-brand-500 dark:border-slate-700 text-xs font-medium text-center transition-all">Web Platform</button>
             <button type="button" onclick="selectDiscipline(this, 'Mobile App')" class="discipline-btn px-3 py-2.5 rounded-xl border border-[#d0d5dd] dark:border-slate-800 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 text-xs font-medium text-center hover:border-slate-400 transition-all">Mobile App</button>
             <button type="button" onclick="selectDiscipline(this, 'Full MVP Build')" class="discipline-btn px-3 py-2.5 rounded-xl border border-[#d0d5dd] dark:border-slate-800 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 text-xs font-medium text-center hover:border-slate-400 transition-all">Full MVP Build</button>
             <button type="button" onclick="selectDiscipline(this, 'Cloud & Systems')" class="discipline-btn px-3 py-2.5 rounded-xl border border-[#d0d5dd] dark:border-slate-800 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 text-xs font-medium text-center hover:border-slate-400 transition-all">Cloud & Systems</button>
@@ -770,12 +781,12 @@ $currentYear = date('Y');
         <div id="form-alert" class="hidden p-4 rounded-xl text-xs font-semibold"></div>
 
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-          <button type="submit" id="submit-btn" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 dark:bg-brand-500 dark:hover:bg-brand-400 text-white dark:text-slate-950 font-bold transition-all shadow-lg shadow-emerald-600/20 dark:shadow-brand-500/20 disabled:opacity-50">
+          <button type="submit" id="submit-btn" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-brand-600 hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400 text-white dark:text-slate-950 font-bold transition-all shadow-lg shadow-brand-600/20 dark:shadow-brand-500/20 disabled:opacity-50">
             Send Inquiry to TechBros ➔
           </button>
           <div class="text-xs dark:text-slate-400 text-slate-500 flex items-center gap-2">
             <span>Direct contact:</span>
-            <a href="mailto:techbros@techbros.co.za" class="text-emerald-600 dark:text-brand-500 font-mono font-semibold hover:underline">techbros@techbros.co.za</a>
+            <a href="mailto:techbros@techbros.co.za" class="text-brand-600 dark:text-brand-400 font-mono font-semibold hover:underline">techbros@techbros.co.za</a>
           </div>
         </div>
       </form>
@@ -940,7 +951,7 @@ $currentYear = date('Y');
       ` : '';
 
       const storeLinkHtml = data.storeUrl ? `
-        <a href="${data.storeUrl}" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs text-center transition-all flex items-center justify-center gap-1.5 shadow-sm">
+        <a href="${data.storeUrl}" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs text-center transition-all flex items-center justify-center gap-1.5 shadow-sm">
           <span>${data.storeText || 'View on Google Play'}</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
@@ -950,7 +961,7 @@ $currentYear = date('Y');
         <div class="flex items-start gap-4 mb-4">
           ${headerIconHtml}
           <div>
-            <span class="text-xs font-mono text-emerald-600 dark:text-brand-500 uppercase tracking-widest font-bold block mb-1">Technical Case Study</span>
+            <span class="text-xs font-mono text-brand-600 dark:text-brand-400 uppercase tracking-widest font-bold block mb-1">Technical Case Study</span>
             <h3 class="text-2xl font-bold dark:text-white text-slate-900 leading-tight mb-1">${data.title}</h3>
             <p class="text-xs dark:text-slate-400 text-slate-500 font-mono">${data.subtitle}</p>
           </div>
@@ -967,7 +978,7 @@ $currentYear = date('Y');
             <strong class="dark:text-slate-200 text-slate-800 block text-xs uppercase font-mono tracking-wider mb-1.5">Architecture & Engineering</strong>
             <p class="dark:text-slate-400 text-slate-600 text-xs leading-relaxed">${data.solution}</p>
           </div>
-          <div class="p-3.5 rounded-xl dark:bg-emerald-950/40 bg-emerald-50 border dark:border-emerald-500/30 border-emerald-200 text-emerald-800 dark:text-emerald-300 text-xs font-medium">
+          <div class="p-3.5 rounded-xl dark:bg-brand-950/40 bg-brand-50 border dark:border-brand-500/30 border-brand-200 text-brand-800 dark:text-brand-300 text-xs font-medium">
             <strong>Key Outcome:</strong> ${data.outcome}
           </div>
         </div>
@@ -1013,7 +1024,7 @@ $currentYear = date('Y');
         const result = await response.json();
 
         if (response.ok && result.success) {
-          alertBox.className = 'block p-4 rounded-xl text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30';
+          alertBox.className = 'block p-4 rounded-xl text-xs font-semibold bg-brand-50 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300 border border-brand-200 dark:border-brand-500/30';
           alertBox.textContent = result.message;
           form.reset();
         } else {
