@@ -6,6 +6,18 @@ declare(strict_types=1);
  * SQLite Database Manager (`techbros_visits.sqlite`)
  */
 
+if (!function_exists('str_contains')) {
+    function str_contains(string $haystack, string $needle): bool {
+        return $needle === '' || strpos($haystack, $needle) !== false;
+    }
+}
+
+if (!function_exists('str_starts_with')) {
+    function str_starts_with(string $haystack, string $needle): bool {
+        return $needle === '' || strpos($haystack, $needle) === 0;
+    }
+}
+
 class TechBrosVisitsDB
 {
     private static ?PDO $pdo = null;
@@ -414,13 +426,23 @@ class TechBrosVisitsDB
     {
         $db = self::getDb();
 
-        $dateFilter = match ($timeRange) {
-            'today' => "date(created_at) = date('now')",
-            '7d' => "created_at >= datetime('now', '-7 days')",
-            '90d' => "created_at >= datetime('now', '-90 days')",
-            'all' => '1=1',
-            default => "created_at >= datetime('now', '-30 days')"
-        };
+        switch ($timeRange) {
+            case 'today':
+                $dateFilter = "date(created_at) = date('now')";
+                break;
+            case '7d':
+                $dateFilter = "created_at >= datetime('now', '-7 days')";
+                break;
+            case '90d':
+                $dateFilter = "created_at >= datetime('now', '-90 days')";
+                break;
+            case 'all':
+                $dateFilter = "1=1";
+                break;
+            default:
+                $dateFilter = "created_at >= datetime('now', '-30 days')";
+                break;
+        }
 
         // Total views
         $stmt = $db->query("SELECT COUNT(*) FROM visits WHERE $dateFilter");

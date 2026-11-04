@@ -484,10 +484,10 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
       new Chart(countryCtx, {
         type: 'bar',
         data: {
-          labels: <?= json_encode(array_map(fn($c) => TechBrosVisitsDB::getCountryFlag($c['country_code']) . ' ' . $c['country_name'], $stats['countries'])) ?>,
+          labels: <?= json_encode(array_map(function($c) { return TechBrosVisitsDB::getCountryFlag($c['country_code']) . ' ' . $c['country_name']; }, $stats['countries'])) ?>,
           datasets: [{
             label: 'Page Views',
-            data: <?= json_encode(array_map(fn($c) => (int)$c['views'], $stats['countries'])) ?>,
+            data: <?= json_encode(array_map(function($c) { return (int)$c['views']; }, $stats['countries'])) ?>,
             backgroundColor: 'rgba(139, 92, 246, 0.7)',
             borderColor: '#8b5cf6',
             borderWidth: 1,
@@ -521,11 +521,11 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
       new Chart(trendCtx, {
         type: 'line',
         data: {
-          labels: <?= json_encode(array_map(fn($d) => substr($d['visit_date'], 5), $stats['dailyHistory'])) ?>,
+          labels: <?= json_encode(array_map(function($d) { return substr($d['visit_date'], 5); }, $stats['dailyHistory'])) ?>,
           datasets: [
             {
               label: 'Total Views',
-              data: <?= json_encode(array_map(fn($d) => (int)$d['views'], $stats['dailyHistory'])) ?>,
+              data: <?= json_encode(array_map(function($d) { return (int)$d['views']; }, $stats['dailyHistory'])) ?>,
               borderColor: '#8b5cf6',
               backgroundColor: 'rgba(139, 92, 246, 0.15)',
               fill: true,
@@ -535,7 +535,7 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
             },
             {
               label: 'Unique Visitors',
-              data: <?= json_encode(array_map(fn($d) => (int)$d['uniques'], $stats['dailyHistory'])) ?>,
+              data: <?= json_encode(array_map(function($d) { return (int)$d['uniques']; }, $stats['dailyHistory'])) ?>,
               borderColor: '#34d399',
               backgroundColor: 'transparent',
               borderDash: [5, 5],
@@ -573,9 +573,9 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
       new Chart(deviceCtx, {
         type: 'doughnut',
         data: {
-          labels: <?= json_encode(array_map(fn($o) => $o['os'], $stats['osList'])) ?>,
+          labels: <?= json_encode(array_map(function($o) { return $o['os']; }, $stats['osList'])) ?>,
           datasets: [{
-            data: <?= json_encode(array_map(fn($o) => (int)$o['count'], $stats['osList'])) ?>,
+            data: <?= json_encode(array_map(function($o) { return (int)$o['count']; }, $stats['osList'])) ?>,
             backgroundColor: [
               '#8b5cf6', '#6366f1', '#3b82f6', '#10b981', '#f59e0b', '#ec4899'
             ],
