@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 /**
  * TechBros Portfolio - Private Regional Analytics Dashboard
  * POPIA & GDPR Compliant In-House Analytics with SQLite
@@ -10,7 +14,19 @@ session_start();
 
 require_once __DIR__ . '/../api/visits-db.php';
 
-$db = TechBrosVisitsDB::getDb();
+try {
+    $db = TechBrosVisitsDB::getDb();
+} catch (\Throwable $e) {
+    echo "<h1>TechBros Analytics Error</h1>";
+    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . " on line " . $e->getLine() . "</p>";
+    echo "<p><strong>PHP Version:</strong> " . PHP_VERSION . "</p>";
+    echo "<p><strong>PDO Drivers:</strong> " . implode(', ', PDO::getAvailableDrivers()) . "</p>";
+    echo "<p><strong>Data Dir Exists:</strong> " . (is_dir(__DIR__ . '/../data') ? 'Yes' : 'No') . "</p>";
+    echo "<p><strong>Data Dir Writable:</strong> " . (is_writable(__DIR__ . '/../data') ? 'Yes' : 'No') . "</p>";
+    echo "<p><strong>Document Root:</strong> " . htmlspecialchars($_SERVER['DOCUMENT_ROOT'] ?? '') . "</p>";
+    exit;
+}
 
 // Handle Logout
 if (isset($_GET['logout'])) {

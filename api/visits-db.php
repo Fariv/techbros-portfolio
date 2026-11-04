@@ -19,8 +19,9 @@ class TechBrosVisitsDB
 
         $dir = dirname(self::$dbFile);
         if (!is_dir($dir)) {
-            mkdir($dir, 0750, true);
+            @mkdir($dir, 0775, true);
         }
+        @chmod($dir, 0775);
 
         $isNew = !file_exists(self::$dbFile);
 
