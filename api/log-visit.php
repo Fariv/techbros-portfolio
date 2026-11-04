@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 /**
  * TechBros Portfolio - High-Performance Visitor Logging Endpoint
  * Invoked asynchronously via navigator.sendBeacon() or background fetch

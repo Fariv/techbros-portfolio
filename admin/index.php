@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 /**
  * TechBros Portfolio - Private Regional Analytics Dashboard
  * POPIA & GDPR Compliant In-House Analytics with SQLite
@@ -17,14 +13,8 @@ require_once __DIR__ . '/../api/visits-db.php';
 try {
     $db = TechBrosVisitsDB::getDb();
 } catch (\Throwable $e) {
-    echo "<h1>TechBros Analytics Error</h1>";
-    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
-    echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . " on line " . $e->getLine() . "</p>";
-    echo "<p><strong>PHP Version:</strong> " . PHP_VERSION . "</p>";
-    echo "<p><strong>PDO Drivers:</strong> " . implode(', ', PDO::getAvailableDrivers()) . "</p>";
-    echo "<p><strong>Data Dir Exists:</strong> " . (is_dir(__DIR__ . '/../data') ? 'Yes' : 'No') . "</p>";
-    echo "<p><strong>Data Dir Writable:</strong> " . (is_writable(__DIR__ . '/../data') ? 'Yes' : 'No') . "</p>";
-    echo "<p><strong>Document Root:</strong> " . htmlspecialchars($_SERVER['DOCUMENT_ROOT'] ?? '') . "</p>";
+    http_response_code(503);
+    echo "<!DOCTYPE html><html><body style='font-family:sans-serif;background:#0b0717;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;'><div style='text-align:center;'><h2>Analytics Initializing</h2><p style='color:#94a3b8;'>Database is preparing storage. Please refresh in a moment.</p></div></body></html>";
     exit;
 }
 
