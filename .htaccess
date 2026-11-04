@@ -17,4 +17,14 @@ DirectoryIndex index.php index.html
     RewriteRule ^\.(?!well-known/) - [F]
     RewriteRule ^_backups/ - [F]
     RewriteRule ^\.agents/ - [F]
+    RewriteRule ^data/ - [F]
 </IfModule>
+
+<FilesMatch "\.(sqlite|sqlite3|db)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>

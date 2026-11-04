@@ -1039,6 +1039,26 @@ $currentYear = date('Y');
         btn.textContent = 'Send Inquiry to TechBros ➔';
       }
     }
+
+    // POPIA & GDPR Compliant Asynchronous Visitor Telemetry (0ms TTFB impact)
+    window.addEventListener('load', function() {
+      try {
+        const payload = JSON.stringify({
+          page_url: window.location.pathname || '/',
+          referrer: document.referrer || 'Direct'
+        });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon('api/log-visit.php', payload);
+        } else {
+          fetch('api/log-visit.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload,
+            keepalive: true
+          }).catch(function() {});
+        }
+      } catch (e) {}
+    });
   </script>
 </body>
 </html>

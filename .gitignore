@@ -8,6 +8,8 @@
 cgi-bin/
 _backups/
 .agents/
+data/*.sqlite*
+data/*.db*
 
 # Dependencies & build caches
 node_modules/
