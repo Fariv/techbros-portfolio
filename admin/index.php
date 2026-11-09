@@ -36,7 +36,7 @@ $authError = '';
 $setupSuccess = '';
 
 // Handle Password Setup on First Run
-if ($isFirstRun && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['setup_password'])) {
+if ($isFirstRun && ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['setup_password'])) {
     $pass = trim((string)$_POST['setup_password']);
     $confirm = trim((string)$_POST['confirm_password']);
 
@@ -55,7 +55,7 @@ if ($isFirstRun && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['setup_
 }
 
 // Handle Login
-if (!$isFirstRun && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_password'])) {
+if (!$isFirstRun && ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['login_password'])) {
     $inputPass = (string)$_POST['login_password'];
     if (password_verify($inputPass, (string)$existingHash)) {
         $_SESSION['techbros_admin'] = true;
@@ -289,14 +289,21 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
         <div class="text-[11px] text-emerald-300 font-medium">Today: +<?= number_format($stats['todayUnique']) ?> unique</div>
       </div>
 
-      <!-- Top Country -->
+      <!-- Top Market & Locality -->
       <div class="glass-panel p-5 rounded-2xl space-y-2">
-        <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Top Market Region</div>
+        <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Top Market & Locality</div>
         <div class="text-xl sm:text-2xl font-black text-brand-300 truncate">
           <?= $topCountry ? TechBrosVisitsDB::getCountryFlag($topCountry['country_code']) . ' ' . htmlspecialchars($topCountry['country_name']) : 'No Data Yet' ?>
         </div>
-        <div class="text-[11px] text-slate-400 font-medium">
-          <?= $topCountry ? number_format($topCountry['views']) . ' views (' . ($stats['totalViews'] > 0 ? round(($topCountry['views'] / $stats['totalViews']) * 100) : 0) . '%)' : 'Awaiting visits' ?>
+        <div class="text-[11px] text-slate-400 font-medium truncate">
+          <?php if (!empty($stats['topCity'])): ?>
+            <span class="text-brand-200 font-semibold">📍 <?= htmlspecialchars($stats['topCity']['location_label']) ?></span>
+            <span class="text-slate-500">·</span> <?= number_format($stats['topCity']['views']) ?> views
+          <?php elseif ($topCountry): ?>
+            <?= number_format($topCountry['views']) ?> views (<?= $stats['totalViews'] > 0 ? round(($topCountry['views'] / $stats['totalViews']) * 100) : 0 ?>%)
+          <?php else: ?>
+            Awaiting visits
+          <?php endif; ?>
         </div>
       </div>
 
@@ -316,11 +323,21 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
     <!-- Charts Row 1: Regional Breakdown & Daily Trends -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       
-      <!-- Top Countries Chart (Horizontal Bar) -->
+      <!-- Regional Geography Chart with Country vs Locality Toggle -->
       <div class="glass-panel p-6 rounded-3xl space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-white text-base">Top Geographic Regions</h3>
-          <span class="text-[10px] font-mono text-brand-300 px-2 py-0.5 rounded-full bg-brand-950/60 border border-brand-500/30">Resolved by Cloudflare/GeoIP</span>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="font-bold text-white text-base">Top Geographic Regions</h3>
+            <p class="text-[11px] text-slate-400">National and municipal distribution</p>
+          </div>
+          <div class="inline-flex p-1 rounded-xl bg-slate-900/90 border border-brand-500/20 text-[11px] font-medium self-start sm:self-auto">
+            <button id="btnGeoCountry" type="button" onclick="setGeoView('country')" class="px-2.5 py-1 rounded-lg transition-all bg-brand-600 text-white font-semibold shadow-sm">
+              By Country
+            </button>
+            <button id="btnGeoCity" type="button" onclick="setGeoView('city')" class="px-2.5 py-1 rounded-lg transition-all text-slate-400 hover:text-white">
+              By City & Locality
+            </button>
+          </div>
         </div>
         
         <?php if (!empty($stats['countries'])): ?>
@@ -361,19 +378,49 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
       
       <!-- Top Cities / Metros List -->
       <div class="glass-panel p-6 rounded-3xl space-y-4 lg:col-span-2">
-        <h3 class="font-bold text-white text-base">Key Municipalities & Metropolitan Centers</h3>
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-white text-base">Key Municipalities & Metropolitan Centers</h3>
+            <p class="text-xs text-slate-400 mt-0.5">High-affinity city nodes, provinces, and regions</p>
+          </div>
+          <span class="text-[11px] font-mono text-brand-300 px-2.5 py-1 rounded-full bg-brand-950/60 border border-brand-500/30">
+            <?= count($stats['cities']) ?> Localities Detected
+          </span>
+        </div>
+
         <?php if (!empty($stats['cities'])): ?>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <?php foreach ($stats['cities'] as $city): ?>
-              <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-900/60 border border-brand-900/30 text-xs">
-                <div class="flex items-center gap-2 truncate">
-                  <span><?= TechBrosVisitsDB::getCountryFlag($city['country_code']) ?></span>
-                  <span class="font-semibold text-white truncate"><?= htmlspecialchars($city['city_name']) ?></span>
-                  <?php if (!empty($city['region_name'])): ?>
-                    <span class="text-[10px] text-slate-400 truncate">(<?= htmlspecialchars($city['region_name']) ?>)</span>
-                  <?php endif; ?>
+              <?php 
+                $percent = $stats['totalViews'] > 0 ? round(($city['views'] / $stats['totalViews']) * 100) : 0;
+              ?>
+              <div class="p-3.5 rounded-2xl bg-slate-900/60 border border-brand-900/40 hover:border-brand-500/40 transition-all flex flex-col justify-between space-y-2">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="flex items-start gap-2.5 min-w-0">
+                    <span class="text-lg leading-none mt-0.5"><?= TechBrosVisitsDB::getCountryFlag($city['country_code']) ?></span>
+                    <div class="min-w-0">
+                      <div class="font-bold text-white text-xs truncate flex items-center gap-1.5">
+                        <span class="truncate"><?= htmlspecialchars($city['city_name'] ?: $city['location_label']) ?></span>
+                        <?php if (!empty($city['region_name']) && $city['region_name'] !== $city['city_name']): ?>
+                          <span class="px-1.5 py-0.5 rounded bg-brand-950 text-[10px] text-brand-300 border border-brand-500/20 font-medium truncate">
+                            <?= htmlspecialchars($city['region_name']) ?>
+                          </span>
+                        <?php endif; ?>
+                      </div>
+                      <div class="text-[10px] text-slate-400 font-medium truncate mt-0.5">
+                        <?= htmlspecialchars($city['country_name']) ?> (<?= htmlspecialchars($city['country_code']) ?>)
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right flex-shrink-0">
+                    <span class="font-mono font-bold text-brand-300 text-xs"><?= number_format($city['views']) ?></span>
+                    <span class="text-[10px] text-slate-500 block font-mono"><?= $percent ?>%</span>
+                  </div>
                 </div>
-                <span class="font-mono font-bold text-brand-300 ml-2"><?= number_format($city['views']) ?></span>
+                <!-- Progress bar -->
+                <div class="w-full bg-slate-950 rounded-full h-1 overflow-hidden">
+                  <div class="bg-gradient-to-r from-brand-500 to-indigo-500 h-1 rounded-full" style="width: <?= max($percent, 4) ?>%"></div>
+                </div>
               </div>
             <?php endforeach; ?>
           </div>
@@ -424,11 +471,24 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
               <?php foreach ($stats['recentVisits'] as $v): ?>
                 <tr class="hover:bg-brand-950/20 transition-colors">
                   <td class="py-3 px-4 whitespace-nowrap">
-                    <span class="mr-1.5"><?= TechBrosVisitsDB::getCountryFlag($v['country_code']) ?></span>
-                    <span class="font-semibold text-white"><?= htmlspecialchars($v['country_name']) ?></span>
-                    <?php if (!empty($v['city_name'])): ?>
-                      <span class="text-[10px] text-slate-400">· <?= htmlspecialchars($v['city_name']) ?></span>
-                    <?php endif; ?>
+                    <div class="flex items-center gap-2.5">
+                      <span class="text-lg leading-none"><?= TechBrosVisitsDB::getCountryFlag($v['country_code']) ?></span>
+                      <div>
+                        <div class="font-semibold text-white flex items-center gap-1.5">
+                          <?php if (!empty($v['city_name'])): ?>
+                            <span><?= htmlspecialchars($v['city_name']) ?></span>
+                            <?php if (!empty($v['region_name']) && $v['region_name'] !== $v['city_name']): ?>
+                              <span class="text-[10px] font-normal text-brand-300 bg-brand-950/80 px-1.5 py-0.5 rounded border border-brand-500/20"><?= htmlspecialchars($v['region_name']) ?></span>
+                            <?php endif; ?>
+                          <?php else: ?>
+                            <span><?= htmlspecialchars($v['country_name']) ?></span>
+                          <?php endif; ?>
+                        </div>
+                        <div class="text-[10px] text-slate-400 font-medium">
+                          <?= htmlspecialchars($v['country_name']) ?> · <span class="font-mono text-slate-500"><?= htmlspecialchars($v['country_code']) ?></span>
+                        </div>
+                      </div>
+                    </div>
                   </td>
                   <td class="py-3 px-4 whitespace-nowrap">
                     <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px]">
@@ -468,18 +528,31 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
 
   <!-- Chart.js Render Scripts -->
   <script>
-    // 1. Regional Countries Chart
+    // 1. Regional Geography Chart (Country vs Locality Toggle)
     <?php if (!empty($stats['countries'])): ?>
+      const geoCountryData = {
+        labels: <?= json_encode(array_map(function($c) { return TechBrosVisitsDB::getCountryFlag($c['country_code']) . ' ' . $c['country_name']; }, $stats['countries'])) ?>,
+        data: <?= json_encode(array_map(function($c) { return (int)$c['views']; }, $stats['countries'])) ?>
+      };
+
+      const geoCityData = {
+        labels: <?= json_encode(array_map(function($c) { 
+            return TechBrosVisitsDB::getCountryFlag($c['country_code']) . ' ' . $c['location_label'] . ' · ' . $c['country_name']; 
+        }, $stats['cities'])) ?>,
+        data: <?= json_encode(array_map(function($c) { return (int)$c['views']; }, $stats['cities'])) ?>
+      };
+
       const countryCtx = document.getElementById('countryChart').getContext('2d');
-      new Chart(countryCtx, {
+      const countryChart = new Chart(countryCtx, {
         type: 'bar',
         data: {
-          labels: <?= json_encode(array_map(function($c) { return TechBrosVisitsDB::getCountryFlag($c['country_code']) . ' ' . $c['country_name']; }, $stats['countries'])) ?>,
+          labels: geoCountryData.labels,
           datasets: [{
             label: 'Page Views',
-            data: <?= json_encode(array_map(function($c) { return (int)$c['views']; }, $stats['countries'])) ?>,
-            backgroundColor: 'rgba(139, 92, 246, 0.7)',
+            data: geoCountryData.data,
+            backgroundColor: 'rgba(139, 92, 246, 0.75)',
             borderColor: '#8b5cf6',
+            hoverBackgroundColor: '#a78bfa',
             borderWidth: 1,
             borderRadius: 8
           }]
@@ -493,8 +566,9 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
           },
           scales: {
             x: {
+              beginAtZero: true,
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8', font: { family: 'Inter', size: 11 } }
+              ticks: { color: '#94a3b8', font: { family: 'Inter', size: 11 }, precision: 0 }
             },
             y: {
               grid: { display: false },
@@ -503,6 +577,33 @@ $isLoggedIn = !empty($_SESSION['techbros_admin']);
           }
         }
       });
+
+      function setGeoView(mode) {
+        const btnCountry = document.getElementById('btnGeoCountry');
+        const btnCity = document.getElementById('btnGeoCity');
+
+        if (mode === 'city' && geoCityData.labels.length > 0) {
+          countryChart.data.labels = geoCityData.labels;
+          countryChart.data.datasets[0].data = geoCityData.data;
+          countryChart.data.datasets[0].backgroundColor = 'rgba(168, 85, 247, 0.75)';
+          countryChart.data.datasets[0].borderColor = '#c084fc';
+          countryChart.data.datasets[0].hoverBackgroundColor = '#c084fc';
+          countryChart.update();
+
+          btnCity.className = 'px-2.5 py-1 rounded-lg transition-all bg-brand-600 text-white font-semibold shadow-sm';
+          btnCountry.className = 'px-2.5 py-1 rounded-lg transition-all text-slate-400 hover:text-white';
+        } else {
+          countryChart.data.labels = geoCountryData.labels;
+          countryChart.data.datasets[0].data = geoCountryData.data;
+          countryChart.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
+          countryChart.data.datasets[0].borderColor = '#8b5cf6';
+          countryChart.data.datasets[0].hoverBackgroundColor = '#a78bfa';
+          countryChart.update();
+
+          btnCountry.className = 'px-2.5 py-1 rounded-lg transition-all bg-brand-600 text-white font-semibold shadow-sm';
+          btnCity.className = 'px-2.5 py-1 rounded-lg transition-all text-slate-400 hover:text-white';
+        }
+      }
     <?php endif; ?>
 
     // 2. Daily Traffic Trend Chart

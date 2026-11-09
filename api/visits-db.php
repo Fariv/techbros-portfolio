@@ -238,25 +238,28 @@ class TechBrosVisitsDB
      */
     public static function resolveGeo(string $ip): array
     {
-        // 1. Direct server / CDN headers (0ms overhead)
+        // 1. Direct server / CDN headers if they provide BOTH Country AND City (0ms overhead)
         $cfCountry = strtoupper(trim((string)($_SERVER['HTTP_CF_IPCOUNTRY'] ?? '')));
-        if ($cfCountry !== '' && strlen($cfCountry) === 2 && $cfCountry !== 'XX') {
+        $cfRegion = trim((string)($_SERVER['HTTP_CF_REGION'] ?? ''));
+        $cfCity = trim((string)($_SERVER['HTTP_CF_IPCITY'] ?? ''));
+
+        if ($cfCountry !== '' && strlen($cfCountry) === 2 && $cfCountry !== 'XX' && $cfCity !== '') {
             $countryName = self::getCountryNameFromCode($cfCountry);
             return [
                 'country_code' => $cfCountry,
                 'country_name' => $countryName,
-                'region_name' => trim((string)($_SERVER['HTTP_CF_REGION'] ?? '')),
-                'city_name' => trim((string)($_SERVER['HTTP_CF_IPCITY'] ?? ''))
+                'region_name' => $cfRegion,
+                'city_name' => $cfCity
             ];
         }
 
-        if (!empty($_SERVER['GEOIP_COUNTRY_CODE'])) {
+        if (!empty($_SERVER['GEOIP_COUNTRY_CODE']) && !empty($_SERVER['GEOIP_CITY'])) {
             $code = strtoupper(trim((string)$_SERVER['GEOIP_COUNTRY_CODE']));
             return [
                 'country_code' => $code,
                 'country_name' => (string)($_SERVER['GEOIP_COUNTRY_NAME'] ?? self::getCountryNameFromCode($code)),
                 'region_name' => (string)($_SERVER['GEOIP_REGION_NAME'] ?? ''),
-                'city_name' => (string)($_SERVER['GEOIP_CITY'] ?? '')
+                'city_name' => (string)$_SERVER['GEOIP_CITY']
             ];
         }
 
@@ -277,8 +280,10 @@ class TechBrosVisitsDB
         $stmt = $db->prepare('SELECT country_code, country_name, region_name, city_name FROM geo_cache WHERE ip_subnet = :s LIMIT 1');
         $stmt->execute([':s' => $subnet]);
         $cached = $stmt->fetch();
-        if ($cached) {
-            return $cached;
+        if ($cached && !empty($cached['country_code'])) {
+            if (!empty($cached['city_name']) || $cfCountry === '') {
+                return $cached;
+            }
         }
 
         // 4. Quick API lookup (cached permanently by /24 subnet) with strict 1.5s timeout
@@ -295,6 +300,17 @@ class TechBrosVisitsDB
                 ':rn' => $geo['region_name'],
                 ':city' => $geo['city_name']
             ]);
+            return $geo;
+        }
+
+        // 5. Fallback to server country if API lookup returned 'XX'
+        if ($cfCountry !== '' && strlen($cfCountry) === 2 && $cfCountry !== 'XX') {
+            return [
+                'country_code' => $cfCountry,
+                'country_name' => self::getCountryNameFromCode($cfCountry),
+                'region_name' => $cfRegion,
+                'city_name' => $cfCity
+            ];
         }
 
         return $geo;
@@ -336,10 +352,10 @@ class TechBrosVisitsDB
         return $default;
     }
 
-    public static function logVisit(array $visitData): bool
+    public static function logVisit(array $visitData = []): bool
     {
-        $ip = self::getClientIp();
-        $ua = (string)($_SERVER['HTTP_USER_AGENT'] ?? '');
+        $ip = !empty($visitData['ip']) ? (string)$visitData['ip'] : self::getClientIp();
+        $ua = !empty($visitData['userAgent']) ? (string)$visitData['userAgent'] : (string)($_SERVER['HTTP_USER_AGENT'] ?? '');
 
         // Drop automated spiders & bots
         if (self::isBot($ua)) {
@@ -352,6 +368,9 @@ class TechBrosVisitsDB
 
         $db = self::getDb();
 
+        $pageUrl = substr((string)($visitData['page_url'] ?? '/'), 0, 255);
+        $referrer = substr((string)($visitData['referrer'] ?? 'Direct'), 0, 255);
+
         // Avoid spamming within the same 5-minute window for the same visitor & page
         $stmt = $db->prepare('
             SELECT id FROM visits 
@@ -362,7 +381,7 @@ class TechBrosVisitsDB
         ');
         $stmt->execute([
             ':h' => $hash,
-            ':url' => substr((string)($visitData['page_url'] ?? '/'), 0, 255)
+            ':url' => $pageUrl
         ]);
         if ($stmt->fetch()) {
             return true; // Already logged recently
@@ -387,8 +406,8 @@ class TechBrosVisitsDB
             ':device' => $deviceInfo['device'],
             ':browser' => $deviceInfo['browser'],
             ':os' => $deviceInfo['os'],
-            ':referrer' => substr((string)($visitData['referrer'] ?? 'Direct'), 0, 255),
-            ':url' => substr((string)($visitData['page_url'] ?? '/'), 0, 255)
+            ':referrer' => $referrer,
+            ':url' => $pageUrl
         ]);
     }
 
@@ -470,16 +489,30 @@ class TechBrosVisitsDB
         ");
         $countries = $stmt->fetchAll();
 
-        // Top Regions / Cities
+        // Top Regions, Cities & Localities
         $stmt = $db->query("
-            SELECT country_code, country_name, region_name, city_name, COUNT(*) as views
+            SELECT 
+                country_code, 
+                country_name, 
+                region_name, 
+                city_name,
+                CASE 
+                    WHEN city_name != '' AND region_name != '' AND city_name != region_name 
+                        THEN city_name || ' (' || region_name || ')'
+                    WHEN city_name != '' THEN city_name
+                    WHEN region_name != '' THEN region_name
+                    ELSE 'Unknown Locality'
+                END as location_label,
+                COUNT(*) as views,
+                COUNT(DISTINCT visitor_hash) as uniques
             FROM visits
-            WHERE $dateFilter AND city_name != ''
-            GROUP BY country_code, city_name
+            WHERE $dateFilter AND (city_name != '' OR region_name != '')
+            GROUP BY country_code, city_name, region_name
             ORDER BY views DESC
-            LIMIT 12
+            LIMIT 15
         ");
         $cities = $stmt->fetchAll();
+        $topCity = $cities[0] ?? null;
 
         // Device breakdown
         $stmt = $db->query("
@@ -528,6 +561,7 @@ class TechBrosVisitsDB
             'todayUnique' => $todayUnique,
             'countries' => $countries,
             'cities' => $cities,
+            'topCity' => $topCity,
             'devices' => $devices,
             'osList' => $osList,
             'dailyHistory' => $dailyHistory,
